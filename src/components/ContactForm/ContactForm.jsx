@@ -19,11 +19,10 @@ const ContactForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
-    dispatch(addContact({ ...values, id: nanoid() }));
+    dispatch(addContact(values));
     resetForm();
   };
-  const nameId = nanoid();
-  const numberId = nanoid();
+
   return (
     <Formik
       initialValues={{
@@ -34,12 +33,14 @@ const ContactForm = () => {
       validationSchema={ValidationSchema}
     >
       <Form className={css.form}>
-        <label htmlFor={nameId}>Name</label>
-        <Field type="text" name="name" id={nameId} />
+        <label htmlFor="name">Name</label>
+        <Field type="text" name="name" id="name" />
         <ErrorMessage className={css.error} name="name" component="span" />
-        <label htmlFor={numberId}>Number</label>
-        <Field type="text" name="number" id={numberId} />
+
+        <label htmlFor="number">Number</label>
+        <Field type="text" name="number" id="number" />
         <ErrorMessage className={css.error} name="number" component="span" />
+
         <button className={css.button} type="submit">
           Add contact
         </button>
